@@ -27,6 +27,11 @@ accion.onsubmit=function(){
     validacionVacio(diw,smDiw);
     validacionVacio(ds,smds);
     validarLongitud(expediente,smExp);
+    validarNota(dwec,smDwec);
+    validarNota(dwes,smdwes);
+    validarNota(eie,smeie);
+    validarNota(ds,smds);
+    validarNota(diw,smDiw);
     return bool;
 }
 function validacionVacio(campos,mensaje){
@@ -37,20 +42,33 @@ function validacionVacio(campos,mensaje){
 }
 function validarLongitud(campo,mensaje){
     let val=campo.substring(0,5);
-    alert(val);
     if(Number(campo.length)==6){
         if(!isNaN(val)){
-            if(isNaN(campo.substring(6))){
-                
+            let valorLetra=campo.substring(5);
+            if(valorLetra.toUpperCase()==campo.substring(5) && isNaN(campo.substring(5)) ){
             }else{
-                mensaje.innerHTML="UNA LETRA AL FINAL NO UN CARACTER ESPECIAL O NUMERO"
+                mensaje.innerHTML="UNA LETRA AL FINAL NO UN CARACTER ESPECIAL O NUMERO y en mayuscula";
+                bool = false;
+                alert(campo.substring(5)) ;
             }
         }else {
-            mensaje.innerHTML="Los primeros caracteres son numeros"
+            mensaje.innerHTML="Los primeros caracteres son numeros";
+            bool = false;
         }
     }else if(Number(campo.length)>=6){
-        mensaje.innerHTML="Longitud larga"
-    }else if(Number(campo.length)<1){
-        mensaje.innerHTML="Longitud corta"
+        mensaje.innerHTML="Longitud larga";
+        bool = false;
+    }else if(Number(campo.length)<6 && campo!=""){
+        bool =false;
+        mensaje.innerHTML="Longitud corta";
+    }
+}
+function validarNota(nota,mens){
+    if(Number(nota)>=10){
+        bool=false;
+        mens.innerHTML="*La nota no puede ser superior a 10"
+    }else if(Number(nota)<0){
+        bool=false;
+        mens.innerHTML="*La nota no puede ser inferior a 0"
     }
 }
