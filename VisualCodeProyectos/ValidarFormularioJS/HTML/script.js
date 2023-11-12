@@ -67,7 +67,7 @@ function validarNota(nota,mens){
     if(Number(nota)>=10){
         bool=false;
         mens.innerHTML="*La nota no puede ser superior a 10"
-    }else if(Number(nota)<0){
+    }else if(Number(nota)<1){
         bool=false;
         mens.innerHTML="*La nota no puede ser inferior a 0"
     }
