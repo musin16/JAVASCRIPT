@@ -1,0 +1,36 @@
+*{box-sizing: border-box;}
+
+button {
+    font-size: 1.7em;
+    position: absolute;
+    display: block;
+    clear: both;
+    margin: 0 auto;
+    top: 20px; 
+    left: 700px;
+    background-color: green;
+}
+
+
+video{
+    margin: 0 auto;
+    width: 300px;
+    height: 250px;
+}
+
+#contenedor{
+    margin: 0 auto;
+}
+
+.claseDiv{
+    border-radius: 5%;
+    border: 1px solid black;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
+    padding: 10px;
+    box-shadow: 10px 10px #888888;
+    margin-bottom: 30px;
+    width: 48%;
+    float: left;
+    font-size: 2em;
+}
