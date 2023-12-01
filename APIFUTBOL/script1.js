@@ -1,5 +1,7 @@
 window.onload = inicio;
+var deportes=[];
 function inicio() {
+    obtenerdatostxt();
     obtenerPaises()
         .then(obtenerDeportes)
         .then(obtenerEquipos)
@@ -12,12 +14,18 @@ function inicio() {
             console.log("Error " + error);
         });
     });
+    document.getElementById("deporte").addEventListener("change", function () {
+        obtenerEquipos().then(obtenerTodo).catch(error => {
+            console.log("Error " + error);
+        });
+    });
     document.getElementById("liga").addEventListener("change", function () {
         obtenerEquiposPorLiga();
     });
 }
 async function obtenerPaises() {
     console.log("entro en datos")
+    obtenerDeportes
     const url = " https://www.thesportsdb.com/api/v1/json/3/all_countries.php";
     const objeto = await fetch(url)
     try {
@@ -50,7 +58,46 @@ async function obtenerDeportes() {
         alert(error);
     }
 }
-
+async function obtenerdatostxt() {
+    fetch("./deportes.txt").then(x => {
+        return x.text();
+    }).then(sport => {
+        var dep = document.getElementById("deporte");
+        var palabras = sport.split('\n');
+        for (let i = 0; i < palabras.length; i++) {
+            let palabra = palabras[i].trim();
+            dep.innerHTML += `<div>
+                <option value="${palabra}">${palabra}</option>
+            </div>`;
+        }
+    }).catch(error => {
+        console.log("error" + error);
+    });
+}
+async function obtenerTodo(){
+    console.log("entro en datos");
+    let pSelecion = document.getElementById("pais").value;
+    let dSelecion = document.getElementById("deporte").value;
+    const url = `https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?s=${dSelecion}&c=${pSelecion}`;
+    const response = await fetch(url);
+   // var arrayE = [];
+    try {
+        const data = await response.json();
+        console.log(data);
+        let contenedor = document.getElementById("contenido");
+        contenedor.innerHTML = '';
+        liga.innerHTML = '';
+        for (let i = 0; i < data.teams.length; i++) {
+            contenedor.innerHTML += `
+            <div>
+                <img src="${data.teams[i].strTeamBadge}" width="200px"/>
+                <p>${data.teams[i].strTeam}</p>
+            </div> `;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
 async function obtenerEquipos() {
     console.log("entro en datos");
     let pSelecion = document.getElementById("pais").value;
