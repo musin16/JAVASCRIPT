@@ -39,7 +39,8 @@ function obtenerImgJuegos() {
     }).then(juegos => {
         for (let i = 0; i < juegos.length; i++) {
             if (pSelec.includes(juegos[i].genre.trim()) && document.getElementById("juego").value.includes(juegos[i].title.trim())) {
-                contenido.innerHTML += `<img src="${juegos[i].thumbnail}"/>`;
+                contenido.innerHTML= `<img src="${juegos[i].thumbnail}"/>`;
+                break;
             }
         }
     }).catch(error => {
@@ -63,5 +64,4 @@ async function obtenerJuego() {
     }).catch(error => {
         console.log('Error:', error);
     }).finally(obtenerImgJuegos());
-
 }
