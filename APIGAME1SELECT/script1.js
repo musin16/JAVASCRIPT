@@ -21,6 +21,7 @@ async function obtenerGenero() {
         for (let i = 0; i < array.length; i++) {
             genero.innerHTML += `<div><option value="${array[i]}">${array[i]}</option></div>`
         }
+        obtenerImgJuegos();
     }).catch(error => {
         console.log('Error:', error);
     });
