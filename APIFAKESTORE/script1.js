@@ -1,4 +1,5 @@
 var cabecera = [];
+tabla1.style.border="5px solid black";
 window.onload = inicio;
 function inicio() {
     let btn = document.getElementById("listar1");
@@ -16,9 +17,11 @@ function cargarTabla(datos) {
     tabla1.innerHTML = "";
     cabecera = Object.keys(datos[0]);
     let tr = document.createElement("tr");
+    tr.style.border="5px solid black";
     for (let i = 0; i < cabecera.length; i++) {
         let th = document.createElement("th");
         th.textContent = cabecera[i];
+        th.style.border="5px solid black";
         th.addEventListener("click", function () {
             ordenar(datos, i);
         });
@@ -31,8 +34,10 @@ function cargarTabla(datos) {
 function cargarContenido(datos) {
     for (let i = 0; i < datos.length; i++) {
         let tr = document.createElement("tr");
+        tr.style.border="5px solid black";
         for (let j = 0; j < cabecera.length; j++) {
             let th = document.createElement("th");
+            th.style.border="5px solid black";
             let campo = datos[i][cabecera[j]];
             if (esVideo(campo)) {
                 asignarVideo(campo, th);
@@ -47,11 +52,11 @@ function cargarContenido(datos) {
     }
 }
 function ordenar(datos, i) {
-    if(isNaN(datos[0][cabecera[i]])){
+    if (isNaN(datos[0][cabecera[i]])) {
         datos.sort((a, b) => a[cabecera[i]].localeCompare(b[cabecera[i]]));
-        console.log(datos); 
-    }else{
-        datos.sort((a,b)=>a[cabecera[i]]-b[cabecera[i]]);
+        console.log(datos);
+    } else {
+        datos.sort((a, b) => a[cabecera[i]] - b[cabecera[i]]);
     }
     cargarTabla(datos);
 }
