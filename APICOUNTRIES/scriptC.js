@@ -1,4 +1,3 @@
-var campos = [];
 window.onload = inicio;
 
 function inicio() {
